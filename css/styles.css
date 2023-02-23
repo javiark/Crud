@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Helvetica, sans-serif;
 }
 
@@ -20,6 +20,7 @@ body{
 .product-form > div {
     margin-bottom: 1rem;
 }
+
 .table-container {
     width: 100vw;
     overflow-x: scroll;
@@ -41,7 +42,7 @@ body{
 
 .table-product tr td:not(:first-child) {
     padding: .5rem;
-
+    
 }
 .table-product tbody tr:nth-child(odd) {
     background-color: rgb(236, 250, 255);
@@ -95,15 +96,11 @@ body{
     background-color: rgb(247, 217, 155); 
 }
 
-
-
-@media screen and (min-width : 1000px){
+@media screen and (min-width: 1000px) {
     .container {
         flex-direction: row;
     }
-    .table-container{
+    .table-container {
         overflow-x: auto;
     }
 }
-
-
