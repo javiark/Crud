@@ -56,6 +56,14 @@ let Products = [
     },
 ];
 
+// swal ({
+//     title: "Bienvenido a SweetAlert",
+//     text: "Este modal o dialogo es provisto por la libreria",
+//     icon: "info",
+//     timer: 3000 //cartel desaparece a los 3 segundos
+    
+// })
+
 //1- Obtener el body de la tabla para poder modificarlo desde JS
 const tableBody = document.querySelector('#table-body');
 
@@ -78,8 +86,22 @@ function renderizarTabla() {
                             <td class="product__name">${producto.name}</td>
                             <td class="product__desc">${producto.description}</td>
                             <td class="product__price">$ ${producto.price}</td>
-                            <td class="product__others">📦🎮</td>
-                            <td class="product__actions">🟥✏️⭐</td>
+                            <td class="product__others">
+                            <i class="fa-solid fa-box"></i>
+                            <i class="fa-solid fa-gamepad"></i>
+                            </td>
+                            <td class="product__actions">
+                            <button class="action__info-btn">
+                            <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button class="action__info-btn-edit">
+                            <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button class="action__info-btn-favorite">
+                            <i class="fa-duotone fa-star"></i>
+                            </button>
+                            
+                        </td>
                         </tr>`
         tableBody.innerHTML += tableRow;
     });

@@ -6,50 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objects</title>
     <link rel="stylesheet" href="/css/styles.css">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 <body>
     <h1>Objects</h1>
     <div class="container">
-        <form id="add-product" class="product-form" onsubmit="addProduct(event)">
-            <div class="input-box">
-                <label for="nameLabel">Producto</label>
-                <input type="text" name="name" id="nameLabel" required>
-            </div>
-            <div class="input-box">
-                <label for="descLabel">Descripción</label>
-                <textarea name="description" id="descLabel" rows="5" required>
-                </textarea>
-            </div>
-    
-            <div class="input-box">
-                <label for="priceLabel">Precio</label>
-                <input type="number" name="price" id="priceLabel" required>
-            </div>
-    
-            <div class="input-box">
-                <label for="imgLabel">Imagen</label>
-                <input type="url" name="image" id="imgLabel" required value="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/TVULFPUK4VHBBPNHF2Z2WTFJPI.jpg">
-            </div>
-    
-            <div class="input-box">
-                <label for="stockLabel">Stock</label>
-                <input type="checkbox" name="stock" id="stockLabel">
-            </div>
-            <div class="input-box">
-                <label for="joystickLabel">Joystick</label>
-                <input type="checkbox" name="joystick" id="joystickLabel">
-            </div>
-            <div class="input-box">
-                <select name="games" id="game">
-                    <option value="" selected></option>
-                    <option value="god_of_war">God of War</option>
-                    <option value="sonic">Sonic</option>
-                    <option value="mario_bros">Mario Bros</option>
-                    <option value="uncharted">Uncharted</option>
-                </select>
-            </div>
-            <button type="submit">Cargar Producto</button>
-        </form>
+        <div class="table-container">
+            <form id="add-product" class="product-form" onsubmit="addProduct(event)">
+                <div class="input-box">
+                    <label for="nameLabel">Producto</label>
+                    <input type="text" name="name" id="nameLabel" required>
+                </div>
+                <div class="input-box">
+                    <label for="descLabel">Descripción</label>
+                    <textarea name="description" id="descLabel" rows="5" required>
+                    </textarea>
+                </div>
+        
+                <div class="input-box">
+                    <label for="priceLabel">Precio</label>
+                    <input type="number" name="price" id="priceLabel" required>
+                </div>
+        
+                <div class="input-box">
+                    <label for="imgLabel">Imagen</label>
+                    <input type="url" name="image" id="imgLabel" required value="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/TVULFPUK4VHBBPNHF2Z2WTFJPI.jpg">
+                </div>
+        
+                <div class="input-box">
+                    <label for="stockLabel">Stock</label>
+                    <input type="checkbox" name="stock" id="stockLabel">
+                </div>
+                <div class="input-box">
+                    <label for="joystickLabel">Joystick</label>
+                    <input type="checkbox" name="joystick" id="joystickLabel">
+                </div>
+                <div class="input-box">
+                    <select name="games" id="game">
+                        <option value="" selected></option>
+                        <option value="god_of_war">God of War</option>
+                        <option value="sonic">Sonic</option>
+                        <option value="mario_bros">Mario Bros</option>
+                        <option value="uncharted">Uncharted</option>
+                    </select>
+                </div>
+                <button type="submit">Cargar Producto</button>
+            </form>
+
+        </div>
         <table class="table-product">
             <thead>
                 <tr>
@@ -67,6 +71,8 @@
         </table>
     </div>
     <!-- <script src="/js/object.js"></script> -->
+    <!---librerias--->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/object-exercise.js"></script>
 </body>
 </html>
