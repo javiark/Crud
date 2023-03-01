@@ -5,7 +5,7 @@ let Products = [
         price: 290000,
         stock: true,
         image: 'https://as.com/meristation/imagenes/2020/11/06/reportajes/1604654372_894608_1604656126_noticia_normal.jpg',
-        games: ['God of War Origin']
+        games: {viewValue:"God of War Origin", value:"gow_origin"}
     },
     {
         name: 'PS4',
@@ -20,8 +20,8 @@ let Products = [
         price: 70000,
         stock: false,
         image: 'https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2019/07/PS4-PS5.jpg',
-        jostick: true,
-        games: ['Uncharted 3']
+        joystick: true,
+        games: {viewValue:'Uncharted 3', value:"uncharted_3"}
     },
 
     {
@@ -36,8 +36,8 @@ let Products = [
         price: 279000,
         stock: true,
         image: 'https://www.atajo.com.ar/images/0000000RRT-0000234357RRT-00002-Consola-Xbox-Series-X-01.jpg',
-        games: ['Halo Infinite'],
-        jostick: true,
+        games: {viewValue:'Halo Infinite', value:"halo_infinite"},
+        joystick: true,
 
     },
     {
@@ -56,16 +56,26 @@ let Products = [
     },
 ];
 
+// const editButtons = document.querySelectorAll(".btn-edit");
+
+// productForm.addEventListener("click", ()=> {
+// console.log(" se hizo click en el formulario") })
+
+const productForm=document.getElementById("add-product");
+const submitBtn = document.getElementById("submit-btn");
+
 
 //1- Obtener el body de la tabla para poder modificarlo desde JS
 const tableBody = document.querySelector('#table-body');
+
+let editIndex;
 
 
 //2- Definir una función para iterar el array
 function renderizarTabla() {
     tableBody.innerHTML = '';
     //3- Iterar el array para acceder a cada producto
-    Products.forEach((producto, index) => { // segundo parametro nunmero de indice que itera del array
+    Products.forEach((producto, index) => {
         // let imageSrc = '/assets/images/no-product.png';
 
         // if(producto.image) {
@@ -76,19 +86,20 @@ function renderizarTabla() {
         //4- Introducir dentro del tbody una fila por producto con sus respectivas celdas
         const tableRow = `<tr class="product">
                             <td class="product__img-cell"><img class="product__img" src="${imageSrc}" alt="${producto.name}"></td>
-                            <td class="product__name">${producto.name}</td>
+                            <td class="product__name" onclick="editName(${index}")>${producto.name}</td>
                             <td class="product__desc">${producto.description}</td>
                             <td class="product__price">$ ${producto.price}</td>
                             <td class="product__info">
-                                <span class="
-                                product__info-icon 
-                                ${ producto.stock ? ''  : ' disabled' }"> 
-                                👜
+                                <span 
+                                    class="
+                                            product__info-icon 
+                                            ${ producto.stock ? '' : 'disabled' }
+                                    "
+                                > 
+                                  📦
                                 </span>
-                                <span class="
-                                product__info-icon 
-                                ${ producto.jostick ? ''  : ' disabled' }">
-                                🎮
+                                <span class="product__info-icon  ${ producto.joystick ? '' : 'disabled' }">
+                                    🎮
                                 </span>
                             </td>
                             <td class="product__actions">
@@ -96,16 +107,17 @@ function renderizarTabla() {
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                            
-                                <button class="product__action-btn btn-edit">
+                                <button class="product__action-btn btn-edit"  onclick="editProduct(${index})">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
-                                <button class="product__action-btn btn-favorite">
+                                <button class="product__action-btn btn-favorite" onclick="">
                                     <i class="fa-regular fa-star"></i>
                                 </button>
                             
                             </td>
                         </tr>`
         tableBody.innerHTML += tableRow;
+
     });
 
 }
@@ -132,35 +144,74 @@ function addProduct(evt) {
     };
 
 
-    const newFormData = new FormData(evt.target);
-    const newProductFormData = Object.fromEntries(newFormData);
-    newProductFormData.stock = newProductFormData.stock === "on" ? true : false;
-    newProductFormData.joystick = newProductFormData.joystick === "on" ? true : false;
-    newProductFormData.price = +newProductFormData.price
+    // const newFormData = new FormData(evt.target);
+    // const newProductFormData = Object.fromEntries(newFormData);
+    // newProductFormData.stock = newProductFormData.stock === "on" ? true : false;
+    // newProductFormData.joystick = newProductFormData.joystick === "on" ? true : false;
+    // newProductFormData.price = +newProductFormData.price
 
 
 
+    if (editIndex >= 0) { //el indice 0 sino lo toma falso, el 0 es undifaned (falso)
+        Products[editIndex]=newProduct
+    } else {
+        Products.push(newProduct);
+    }
 
-
-    console.log(newProductFormData);
-
-    Products.push(newProductFormData);
-
-    // console.log(Products)
-
+    editIndex=undefined; // para que se vacie
+    submitBtn.classList.remove("edit-btn");
+    submitBtn.innerText = "Cargar Prodcuto"
+ 
     renderizarTabla();
-
-
 
     evt.target.reset()
     elements.name.focus();
-
-
 }
-function deleteProduct(indice){
-    Products.splice(indice, 1); // para borrar un array. primero desde donde empieza, despues cuantos array se borran
+
+
+
+function deleteProduct(indice) {
+
+    Products.splice(indice, 1);
+
     renderizarTabla();
+
 }
+
+
+
+function editProduct(idx){
+    submitBtn.classList.add("edit-btn");
+    submitBtn.innerText = "Modificar Prodcuto"
+
+    let product = Products[idx];
+
+
+    // console.table(product);
+    const el=productForm.elements;
+    el.description.value = product.description;
+    el.name.value=product.name;
+    el.price.value=product.price;
+    el.image.value=product.image;
+    el.stock.checked=product.stock;
+    el.joystick.checked=product.joystick;
+    // console.log("indice", idx)
+    // console.log("product:", product)
+    editIndex=idx;
+}
+
+function setFavoriteProduct(index)
+{
+    //Checkear si en el array productos hay algun producto cuyo indice sea distinto al elegido con la propiedad favorite: true tenemos que setearla en falso.
+    // Setear el producto elegido como favorite: true
+
+}
+
+
+
+
+
+
 
 
 
@@ -171,5 +222,5 @@ function deleteProduct(indice){
 //     price
 //     imagen
 //     stock?
-//     jostick?
+//     joystick?
 //     games?

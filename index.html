@@ -12,7 +12,8 @@
 <body>
     <h1>Objects</h1>
     <div class="container">
-        <form id="add-product" class="product-form" onsubmit="addProduct(event)">
+        <form id="add-product" class="product-form" onsubmit="addProduct(event)"
+        >
             <div class="input-box">
                 <label for="nameLabel">Producto</label>
                 <input type="text" name="name" id="nameLabel" required>
@@ -50,7 +51,7 @@
                     <option value="uncharted">Uncharted</option>
                 </select>
             </div>
-            <button type="submit">Cargar Producto</button>
+            <button type="submit" class="submit-btn" id="submit-btn">Cargar Producto</button>
         </form>
         <div class="table-container">
             <table class="table-product">

@@ -10,16 +10,25 @@ body {
 
 .container {
     display: flex;
-    flex-direction: column;
-}
-
-.product-form {
-    padding: 2rem;
+    flex-direction: column;    padding: 2rem;
     border: 3px solid salmon;
 }
 .product-form > div {
     margin-bottom: 1rem;
 }
+
+.submit-btn {
+    padding: .5rem 1rem;
+    border: 2px solid rgb(159, 241, 35);
+    color: white;
+    background-color: green;
+}
+
+.edit-btn{
+    background-color: dodgerblue;
+    border-color: skyblue;
+}
+
 
 .table-container {
     width: 100vw;
@@ -68,7 +77,7 @@ body {
 .product__info-icon.disabled{
     filter: grayscale(1);
     opacity: .5;
-    pointer-events: none;
+    pointer-events: none; 
 }
 .product__info{
     font-size: 1.25rem !important;
@@ -78,6 +87,7 @@ body {
     text-align: center;
     font-size: 1.5rem;
 }
+
 
 .product__action-btn {
     background-color: rgb(254, 33, 33);
