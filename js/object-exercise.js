@@ -1,3 +1,4 @@
+
 // let Products = [
 //     {
 //         name: 'PS5',
@@ -166,8 +167,16 @@ function addProduct(evt) {
 
     if (editIndex >= 0) { //el indice 0 sino lo toma falso, el 0 es undifaned (falso)
         Products[editIndex]=newProduct
+        swal ({
+            title:"el producto se edito correctamente",
+            icon:"info"
+        })
     } else {
         Products.push(newProduct);}
+        swal({
+            title:"el producto se agrego correctamente",
+            icon: "success",
+        })
 
     //Guardarlo en el localStorage
     localStorage.setItem('Products', JSON.stringify(Products))
@@ -186,10 +195,23 @@ function addProduct(evt) {
 
 
 function deleteProduct(indice) {
+    swal({
+        title: "Borrar producto",
+        text: `Esta seguro que desea borrar el producto ${Product[index].name}`
+        icon:`warning`,
+        buttons: {
+            cancel:"Cancelar",
+            delete:"Borrar",
+        }
+    })
 
     Products.splice(indice, 1);
     localStorage.setItem("Products",JSON.stringify(Products))
+    swal({
+        title:"Elemento borrado correctamente",
+        icon:"error"
 
+    });
     renderizarTabla();
 
 }
@@ -223,6 +245,8 @@ function setFavoriteProduct(index) {
         if(index===idx) prod.favorite = true;
         else prod.favorite = false;
     });
+
+    localStorage.setItem("favorites", JSON.stringify(favorites))
     renderizarTabla();
 }
 
