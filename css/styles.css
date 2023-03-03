@@ -7,11 +7,18 @@
 body {
     font-family: Helvetica, sans-serif;
 }
+.product-form {
+    padding: 2rem;
+    border: 3px solid salmon;
+    margin: 10px;
+}
+
 
 .container {
     display: flex;
-    flex-direction: column;    padding: 2rem;
-    border: 3px solid salmon;
+    flex-direction: column;    
+    /* padding: 2rem;
+    border: 3px solid salmon; */
 }
 .product-form > div {
     margin-bottom: 1rem;
