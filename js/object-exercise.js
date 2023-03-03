@@ -1,65 +1,71 @@
-let Products = [
-    {
-        name: 'PS5',
-        description: 'La consola más potente de Sony al día de la fecha',
-        price: 290000,
-        stock: true,
-        image: 'https://as.com/meristation/imagenes/2020/11/06/reportajes/1604654372_894608_1604656126_noticia_normal.jpg',
-        games: {viewValue:"God of War Origin", value:"gow_origin"}
-    },
-    {
-        name: 'PS4',
-        description: 'La consola anterior de Sony',
-        price: 140000,
-        stock: true,
-        image: 'https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2019/07/PS4-PS5.jpg'
-    },
-    {
-        name: 'PS3',
-        description: 'La consola anterior de Sony',
-        price: 70000,
-        stock: false,
-        image: 'https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2019/07/PS4-PS5.jpg',
-        joystick: true,
-        games: {viewValue:'Uncharted 3', value:"uncharted_3"}
-    },
+// let Products = [
+//     {
+//         name: 'PS5',
+//         description: 'La consola más potente de Sony al día de la fecha',
+//         price: 290000,
+//         stock: true,
+//         image: 'https://as.com/meristation/imagenes/2020/11/06/reportajes/1604654372_894608_1604656126_noticia_normal.jpg',
+//         games: {viewValue:"God of War Origin", value:"gow_origin"}
+//     },
+//     {
+//         name: 'PS4',
+//         description: 'La consola anterior de Sony',
+//         price: 140000,
+//         stock: true,
+//         image: 'https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2019/07/PS4-PS5.jpg'
+//     },
+//     {
+//         name: 'PS3',
+//         description: 'La consola anterior de Sony',
+//         price: 70000,
+//         stock: false,
+//         image: 'https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2019/07/PS4-PS5.jpg',
+//         joystick: true,
+//         games: {viewValue:'Uncharted 3', value:"uncharted_3"}
+//     },
 
-    {
-        name: 'PS2',
-        description: 'La consola anterior de Sony',
-        price: 30000,
-        stock: false,
-    },
-    {
-        name: 'XBOX Series X',
-        description: 'La consola más potente de Microsoft al día de la fecha',
-        price: 279000,
-        stock: true,
-        image: 'https://www.atajo.com.ar/images/0000000RRT-0000234357RRT-00002-Consola-Xbox-Series-X-01.jpg',
-        games: {viewValue:'Halo Infinite', value:"halo_infinite"},
-        joystick: true,
+//     {
+//         name: 'PS2',
+//         description: 'La consola anterior de Sony',
+//         price: 30000,
+//         stock: false,
+//     },
+//     {
+//         name: 'XBOX Series X',
+//         description: 'La consola más potente de Microsoft al día de la fecha',
+//         price: 279000,
+//         stock: true,
+//         image: 'https://www.atajo.com.ar/images/0000000RRT-0000234357RRT-00002-Consola-Xbox-Series-X-01.jpg',
+//         games: {viewValue:'Halo Infinite', value:"halo_infinite"},
+//         joystick: true,
 
-    },
-    {
-        name: 'XBOX One',
-        description: 'La consola anterior de Microsoft',
-        price: 115000,
-        stock: false,
-        image: 'https://i.blogs.es/a7dc9c/fc7174d71089999f6a7e15c1d16/1366_2000.png'
-    },
-    {
-        name: 'XBOX 360',
-        description: 'La consola de Microsoft que compite con la PS3',
-        price: 60000,
-        stock: true,
-        image: 'https://http2.mlstatic.com/D_NQ_NP_686099-MLA32731207921_112019-O.webp',
-    },
-];
+//     },
+//     {
+//         name: 'XBOX One',
+//         description: 'La consola anterior de Microsoft',
+//         price: 115000,
+//         stock: false,
+//         image: 'https://i.blogs.es/a7dc9c/fc7174d71089999f6a7e15c1d16/1366_2000.png'
+//     },
+//     {
+//         name: 'XBOX 360',
+//         description: 'La consola de Microsoft que compite con la PS3',
+//         price: 60000,
+//         stock: true,
+//         image: 'https://http2.mlstatic.com/D_NQ_NP_686099-MLA32731207921_112019-O.webp',
+//     },
+// ];
+
+let Products =JSON.parse(localStorage.getItem('Products')) || [];
+let favorites = [];
 
 // const editButtons = document.querySelectorAll(".btn-edit");
 
 // productForm.addEventListener("click", ()=> {
 // console.log(" se hizo click en el formulario") })
+// swal({
+//     title: localStorage.getItem("Products")
+// })
 
 const productForm=document.getElementById("add-product");
 const submitBtn = document.getElementById("submit-btn");
@@ -74,6 +80,10 @@ let editIndex;
 //2- Definir una función para iterar el array
 function renderizarTabla() {
     tableBody.innerHTML = '';
+    if(Products.length===0){
+        tableBody.innerHTML="<p class='disabled'>NO SE ENCONTRARON PRODUCTOS</p>"
+        return
+    }
     //3- Iterar el array para acceder a cada producto
     Products.forEach((producto, index) => {
         // let imageSrc = '/assets/images/no-product.png';
@@ -110,7 +120,7 @@ function renderizarTabla() {
                                 <button class="product__action-btn btn-edit"  onclick="editProduct(${index})">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
-                                <button class="product__action-btn btn-favorite" onclick="">
+                                <button class="product__action-btn btn-favorite ${producto.favorite===true ? 'active':''}" onclick="setFavoriteProduct(${index})">
                                     <i class="fa-regular fa-star"></i>
                                 </button>
                             
@@ -123,6 +133,8 @@ function renderizarTabla() {
 }
 
 renderizarTabla();
+
+//****ADD EDIT PRODUCT*** */
 
 function addProduct(evt) {
     evt.preventDefault();
@@ -155,8 +167,11 @@ function addProduct(evt) {
     if (editIndex >= 0) { //el indice 0 sino lo toma falso, el 0 es undifaned (falso)
         Products[editIndex]=newProduct
     } else {
-        Products.push(newProduct);
-    }
+        Products.push(newProduct);}
+
+    //Guardarlo en el localStorage
+    localStorage.setItem('Products', JSON.stringify(Products))
+                        //(nombreKey, dataValue)
 
     editIndex=undefined; // para que se vacie
     submitBtn.classList.remove("edit-btn");
@@ -173,6 +188,7 @@ function addProduct(evt) {
 function deleteProduct(indice) {
 
     Products.splice(indice, 1);
+    localStorage.setItem("Products",JSON.stringify(Products))
 
     renderizarTabla();
 
@@ -200,12 +216,17 @@ function editProduct(idx){
     editIndex=idx;
 }
 
-function setFavoriteProduct(index)
-{
+function setFavoriteProduct(index) {
     //Checkear si en el array productos hay algun producto cuyo indice sea distinto al elegido con la propiedad favorite: true tenemos que setearla en falso.
     // Setear el producto elegido como favorite: true
-
+    Products.forEach((prod,idx)=>{
+        if(index===idx) prod.favorite = true;
+        else prod.favorite = false;
+    });
+    renderizarTabla();
 }
+
+
 
 
 

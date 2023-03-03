@@ -111,9 +111,13 @@ body {
 .btn-favorite {
     background-color: rgb(253, 247, 230); 
 }
-.btn-favorite:hover {
-    background-color: rgb(247, 217, 155); 
+.btn-favorite.active{
+    background-color: rgb(250,193,30);
 }
+.btn-favorite:hover {
+    background-color: rgb(218, 147, 6); 
+}
+
 
 @media screen and (min-width: 1000px) {
     .container {
