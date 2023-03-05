@@ -272,7 +272,7 @@ function deleteProduct(indice) {
             renderizarTabla(); 
 
         }else {
-            return ;
+            return ; //return null
         }
     })
 
@@ -304,10 +304,36 @@ function editProduct(idx){
 function setFavoriteProduct(index) {
     //Checkear si en el array productos hay algun producto cuyo indice sea distinto al elegido con la propiedad favorite: true tenemos que setearla en falso.
     // Setear el producto elegido como favorite: true
+
+
     Products.forEach((prod,idx)=>{
         if(index===idx) prod.favorite = true;
         else prod.favorite = false;
     });
+
+    //--------------------------------------------------------
+    // const favCount = 0;
+    // const prodFiltradosFavoritos= Products.forEach(prod => {
+    //     if(prod.favorite) {
+    //         favCount++
+    //     }
+    // })
+
+    //     if (favCount >= 3){
+    //     favorites.shift();
+    // }
+    // favorites.push(index)
+    //---------------------------------------------
+    //otra forma
+    // prodFiltradosFavoritos.length >=3
+
+    // console.log(index)
+
+    // if (favorite.length >= 3){
+    //     favorite.shift();
+    // }
+    // favorites.push(index)
+
 
     localStorage.setItem("favorites", JSON.stringify(favorites))
     renderizarTabla();
