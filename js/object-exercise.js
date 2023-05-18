@@ -197,7 +197,7 @@ function addProduct(evt) {
 function deleteProduct(indice) {
     swal({
         title: "Borrar producto",
-        text: `Esta seguro que desea borrar el producto ${Product[index].name}`
+        text: `Esta seguro que desea borrar el producto ${Product[index].name}`,
         icon:`warning`,
         buttons: {
             cancel:"Cancelar",
